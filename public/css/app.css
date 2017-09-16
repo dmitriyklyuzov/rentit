@@ -1,5 +1,34 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://bootswatch.com/flatly/bootstrap.min.css);.navbar {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://bootswatch.com/flatly/bootstrap.min.css);@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);@import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css);.navbar {
   border-radius: 0px;
   -moz-border-radius: 0px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px;
+  /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.content {
+  padding-bottom: 60px;
+}
+
+#googleMapsEmbed {
+  padding-top: 60px;
 }
 

@@ -2,3 +2,30 @@
 	border-radius: 0px;
 	-moz-border-radius: 0px;
 }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  // top: 60px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.content {
+	padding-bottom: 60px;
+}
+
+#googleMapsEmbed{
+  padding-top: 60px;
+}

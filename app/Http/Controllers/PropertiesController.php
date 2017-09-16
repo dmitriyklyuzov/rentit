@@ -15,7 +15,7 @@ class PropertiesController extends Controller
     public function index()
     {
         $properties = Property::all();
-        return view('pages.index')->with('properties', $properties);
+        return view('pages.index')->with(['properties' => $properties, 'title' => 'Welcome']);
     }
 
     /**
@@ -25,7 +25,7 @@ class PropertiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('properties.create')->with('title', 'Add Property');
     }
 
     /**
@@ -47,7 +47,8 @@ class PropertiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $property = Property::findOrFail($id);
+        return view('properties.show')->with(['property' => $property, 'title' => $property->title]);
     }
 
     /**

@@ -44,6 +44,9 @@
 	                        <li>
 	                            <a href="{{ url('dashboard') }}">Dashboard</a>
 	                        </li>
+	                        <li>
+	                        	<a href="{{ route('properties.create') }}">Add Listing</a>
+	                        </li>
 	                    </ul>
 	                </li>
 	            @endif

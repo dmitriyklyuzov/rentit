@@ -11,7 +11,12 @@
 			@foreach($properties as $property)
 				<div class="col-md-sm col-md-4">
 					<div class="thumbnail">
-						<img src="http://cdn.homedsgn.com/wp-content/uploads/2015/02/Capitol-Hill-Loft-03.jpg" alt="{{$property->title}}">
+						<a href="/properties/{{$property->id}}">
+							<img
+								class="img-responsive"
+								src="http://cdn.homedsgn.com/wp-content/uploads/2015/02/Capitol-Hill-Loft-03.jpg"
+								alt="{{$property->title}}">
+						</a>
 						<div class="caption">
 							<h3>{{$property->title}}</h3>
 							<p><strong>${{$property->price}}</strong></p>
@@ -24,7 +29,10 @@
 								<br>
 								<br>
 							@endif
-							<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							<p>
+								<a href="/properties/{{$property->id}}" class="btn btn-primary" role="button">More Info</a>
+								{{-- <a href="#" class="btn btn-default" role="button">Button</a> --}}
+							</p>
 						</div>
 					</div>
 				</div>
