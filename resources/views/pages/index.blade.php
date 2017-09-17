@@ -27,7 +27,7 @@
 							@else
 								<p>{{$property->description}}</p>
 								<br>
-								<br>
+								{{-- <br> --}}
 							@endif
 							<p>
 								<a href="/properties/{{$property->id}}" class="btn btn-primary" role="button">More Info</a>

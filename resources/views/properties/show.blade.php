@@ -49,41 +49,34 @@
 				</div>
 			</div>
 			
-			<hr><br>
+			<hr>
 			
 			{{-- Description text --}}
+			<p><b>Description</b></p>
+			<br>
 			<p>{{$property->description}}</p>
 			
-			<br><hr>
+			<hr>
 			
-			{{-- Details and price--}}
-			<div class="row">
-				{{-- Details --}}
-				<div class="col-xs-6">
-					<p><b>Details</b></p>
-					<br>
-					<p>Bedrooms: <b>{{$property->bedrooms}}</b></p>
-					<p>Bathrooms: <b>{{$property->bathrooms}}</b></p>
-					<p>Utilities included: <b>@if($property->utilities_included==1) Yes @else No @endif</b></p>	
-				</div>
-				{{-- Prices and Fees --}}
-				<div class="col-xs-6">
-					<p><b>Price and fees</b></p>
-					<br>
-					<p>Monthly: <b>${{$property->price}}</b></p>
-					<p>Broker fee: <b>${{$property->price}}</b></p>
-					<p>Security deposit: <b>${{$property->price}}</b></p>
-				</div>
-			</div>
-			
-			<br><hr>
+			<p><b>Details</b></p>
+			<br>
+			<p>Bedrooms: <b>{{$property->bedrooms}}</b></p>
+			<p>Bathrooms: <b>{{$property->bathrooms}}</b></p>
+			<p>Utilities included: <b>@if($property->utilities_included==1) Yes @else No @endif</b></p>
+
+			<hr>
 
 			{{-- Full address --}}
 			<p><b>Address</b></p>
 			<br>
 			<p>{{$property->getFullAddress()}}</p>
 
-			<hr><br>
+			<hr>
+
+			<p><b>Monthly</b></p>
+			<h1>${{$property->price}}</h1>
+
+			<hr>
 
 			{{-- Contact --}}
 			<div class="row">

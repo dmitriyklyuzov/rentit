@@ -36,7 +36,37 @@ class PropertiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // // Validate input
+        // $this->validate($request, [
+        //     'title'=>'required'
+        // ]);
+
+        // Create property
+        $property = new Property();
+        $property->title = $request->input('title');
+        $property->bedrooms = $request->input('bedrooms');
+        $property->bathrooms = $request->input('bathrooms');
+        $property->available = $request->input('available');
+        $property->utilities_included = $request->input('utilities_included');
+        $property->price = $request->input('price');
+        $property->description = $request->input('description');
+        $property->street = $request->input('street');
+        $property->apartment = $request->input('apartment');
+        $property->city = $request->input('city');
+        $property->state = $request->input('state');
+        $property->zip = $request->input('zip');
+        $property->user_id = auth()->user()->id;
+
+        $property->type = 'Residential';
+        // $property->rented = '0000-00-00 00:00:00';
+        $property->cover_image = 'NULL';
+
+        $property->save();
+
+        return redirect('/');
+        // return $request->input('available');
+        return view('properties.show')->with(['property' => $property, 'title' => 'test']);        
+        return $property;
     }
 
     /**
