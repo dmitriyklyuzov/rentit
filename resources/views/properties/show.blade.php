@@ -1,6 +1,26 @@
 @extends('layouts.app')
 
+@section('title')
+	{{$property->title}}
+@endsection
+
 @section('content')
+
+	{{-- Controls --}}
+    @if(!Auth::guest())
+        @if($property->user_id == Auth::id())
+            <div class="row">
+                <div class="pull-right">
+                  <a href="{{ route('properties.edit', ['id'=>$property->id]) }}" class="btn btn-default">Edit</a>
+                  <form action="{{ route('properties.destroy', ['id'=>$property->id]) }}" method="post" class="display-inline" onsubmit=" return confirmBeforeDeleting({{ $property->id }}); ">
+                        {{ csrf_field() }}
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="submit" value="Delete" class="btn btn-danger">
+                  </form>
+                </div>
+            </div>
+        @endif
+    @endif
 
 	<hr><br>
 	
@@ -99,5 +119,16 @@
 				</div>
 			</div>
 		</div>
+
+		<script>
+	        function confirmBeforeDeleting(id){
+	            // if the user does NOT confirm the delete action, this function returns
+	            var confirmed = confirm("Delete this listing?");
+	            if(confirmed){
+	                return true;
+	            }
+	            else return false;
+	        }
+	    </script>
 			
 @endsection

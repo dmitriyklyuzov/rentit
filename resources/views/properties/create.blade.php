@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+	Add Property
+@endsection
+
 @section('content')
 	<div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -14,9 +18,9 @@
 						<br><p class="text-center"><b>Details</b></p><br>
 						{{ Form::bootText('Number of bedrooms', 'bedrooms', '', ['placeholder'=>'3']) }}
 						{{ Form::bootText('Number of bathrooms', 'bathrooms', '', ['placeholder'=>'1.5']) }}
-						{{ Form::bootDrop('Available', 'available') }}
-						{{ Form::bootDrop('Utilities included', 'utilities_included') }}
-						{{ Form::bootText('Price', 'price', '', ['placeholder'=>'1500']) }}
+						{{ Form::bootDrop('Available', 'available', '1') }}
+						{{ Form::bootDrop('Utilities included', 'utilities_included', '1') }}
+						{{ Form::bootCurrency('Price', 'price', '', ['placeholder'=>'1500']) }}
 						{{ Form::bootTextArea('Description', 'description', '', ['placeholder'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore excepturi omnis earum, deleniti quisquam. Provident facere quidem, quos culpa et, asperiores aliquid, laborum odio quibusdam, voluptas id officiis sint quaerat!']) }}
 
 						{{-- Address --}}

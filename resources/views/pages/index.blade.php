@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+	Welcome
+@endsection
+
 @section('content')
 	<h1 class="text-center">Welcome</h1>
 	
@@ -20,15 +24,16 @@
 						<div class="caption">
 							<h3>{{$property->title}}</h3>
 							<p><strong>${{$property->price}}</strong></p>
-							{{-- If description is longer than 105 characters, display the first 105 + '...' --}}
-							@if(strlen($property->description)>105)
-								<p>{{substr($property->description, 0, 105)}}...</p>
-							{{-- Otherwise show full description + two line breaks to make thumbnails same height --}}
-							@else
-								<p>{{$property->description}}</p>
-								<br>
-								{{-- <br> --}}
-							@endif
+
+							{{-- Make thumbnails same height --}}
+							<p class="indexDescription">
+								@if(strlen($property->description)>105)
+									{{substr($property->description, 0, 105)}}...
+								@else
+									{{$property->description}}
+								@endif
+							</p>
+							
 							<p>
 								<a href="/properties/{{$property->id}}" class="btn btn-primary" role="button">More Info</a>
 								{{-- <a href="#" class="btn btn-default" role="button">Button</a> --}}

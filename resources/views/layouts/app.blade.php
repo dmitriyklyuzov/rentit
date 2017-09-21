@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>{{env('APP_NAME')}} - {{$title}}</title>
+	<title>@yield('title', env('APP_NAME'))</title>
 	<meta name="csrf-token" content="{{csrf_token()}}">
 	{{-- Compiled App.css --}}
 	<link rel="stylesheet" href="/css/app.css">

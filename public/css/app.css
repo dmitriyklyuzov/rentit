@@ -32,3 +32,11 @@ body {
   padding-top: 60px;
 }
 
+.indexDescription {
+  min-height: 4.2em;
+}
+
+.display-inline {
+  display: inline;
+}
+
