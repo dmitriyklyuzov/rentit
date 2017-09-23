@@ -789,6 +789,8 @@ module.exports = __webpack_require__(40);
 
 __webpack_require__(10);
 
+__webpack_require__(45);
+
 window.Vue = __webpack_require__(35);
 
 /**
@@ -42088,6 +42090,28 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */
+/***/ (function(module, exports) {
+
+function confirmBeforeDeleting() {}
+// if the user does NOT confirm the delete action, this function returns
+// return confirm("Delete this listing?");
+
+
+// function confirmBeforeDeleting(id){
+//     // if the user does NOT confirm the delete action, this function returns
+//     var confirmed = confirm("Delete this listing?");
+//     if(confirmed){
+//         return true;
+//     }
+//     else return false;
+// }
 
 /***/ })
 /******/ ]);

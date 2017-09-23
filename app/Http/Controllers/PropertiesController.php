@@ -7,33 +7,17 @@ use App\Property;
 
 class PropertiesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::orderBy('created_at', 'desc')->get();
         return view('pages.index')->with(['properties' => $properties]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('properties.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // // Validate input
@@ -64,41 +48,22 @@ class PropertiesController extends Controller
         $property->save();
 
         return redirect('/');
-        return view('properties.show')->with(['property' => $property, 'title' => 'test']);        
+        return view('properties.show')->with(['property' => $property, 'success' => 'Property Added']);        
         return $property;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $property = Property::findOrFail($id);
         return view('properties.show')->with(['property' => $property]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $property = Property::findOrFail($id);
         return view('properties.edit')->with(['property' => $property]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         // // Validate input
@@ -130,19 +95,14 @@ class PropertiesController extends Controller
 
         $property->save();
 
-        return redirect('/');
-        return view('properties.show')->with(['property' => $property]);        
-        return $property;
+        return redirect(route('properties.show', ['id'=>$id]));
+        return view('properties.show')->with(['property' => $property, 'success' => 'Property Updated']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $property = Property::findOrFail($id);
+        $property->delete();
+        return redirect('/dashboard')->with('success', 'Property Deleted');
     }
 }

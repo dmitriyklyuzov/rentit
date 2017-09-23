@@ -11,6 +11,8 @@
 <body>
 	@include('parts.navbar')
 	<div class="container content">
+		{{-- Messages --}}
+		@include('parts.messages')
 		{{-- Main Content --}}
 		@yield('content')
 	</div>

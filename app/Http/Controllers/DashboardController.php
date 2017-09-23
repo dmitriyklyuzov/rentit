@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Property;
 use Auth;
 
 class DashboardController extends Controller
@@ -26,6 +27,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-        return view('pages.dashboard')->with('user', $user);
+        $user_id = $user->id;
+        $properties = Property::where('user_id', $user_id)->get();
+        return view('pages.dashboard')->with(['user' => $user, 'properties' => $properties]);
     }
 }

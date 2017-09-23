@@ -12,11 +12,15 @@
             <div class="row">
                 <div class="pull-right">
                   <a href="{{ route('properties.edit', ['id'=>$property->id]) }}" class="btn btn-default">Edit</a>
-                  <form action="{{ route('properties.destroy', ['id'=>$property->id]) }}" method="post" class="display-inline" onsubmit=" return confirmBeforeDeleting({{ $property->id }}); ">
-                        {{ csrf_field() }}
+                  <form action="{{ route('properties.destroy', ['id'=>$property->id]) }}" method="post" class="display-inline" onsubmit="return confirm('Delete this listing?');">
+                       {{ csrf_field() }}
                       <input type="hidden" name="_method" value="DELETE">
                       <input type="submit" value="Delete" class="btn btn-danger">
                   </form>
+                  {{-- {!! Form::open(['action' => ['PropertiesController@destroy', $property->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
+				    	{{ Form::hidden('_method', 'DELETE') }}
+				    	{{ Form::bootSubmit('Delete', ['class' => 'btn btn-danger'])}}
+					{!! Form::close() !!} --}}
                 </div>
             </div>
         @endif
@@ -48,7 +52,10 @@
 		{{-- Right column --}}
 		<div class="col-md-4 col-sm-5">
 			<h1>{{$property->title}} <small>${{$property->price}}</small></h1>
-			<br><hr>
+			<br>
+			{{-- <span class="badge">Just listed!</span> --}}
+			<p>Listed on {{$property->created_at}}</p>
+			<hr>
 
 			{{-- Info icons --}}
 			<div class="row">
@@ -120,15 +127,4 @@
 			</div>
 		</div>
 
-		<script>
-	        function confirmBeforeDeleting(id){
-	            // if the user does NOT confirm the delete action, this function returns
-	            var confirmed = confirm("Delete this listing?");
-	            if(confirmed){
-	                return true;
-	            }
-	            else return false;
-	        }
-	    </script>
-			
 @endsection

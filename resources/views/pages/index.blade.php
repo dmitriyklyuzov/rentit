@@ -16,10 +16,10 @@
 				<div class="col-md-sm col-md-4">
 					<div class="thumbnail">
 						<a href="/properties/{{$property->id}}">
-							<img
-								class="img-responsive"
-								src="http://cdn.homedsgn.com/wp-content/uploads/2015/02/Capitol-Hill-Loft-03.jpg"
-								alt="{{$property->title}}">
+								<img
+									class="img-responsive"
+									src="http://cdn.homedsgn.com/wp-content/uploads/2015/02/Capitol-Hill-Loft-03.jpg"
+									alt="{{$property->title}}">
 						</a>
 						<div class="caption">
 							<h3>{{$property->title}}</h3>
@@ -36,7 +36,6 @@
 							
 							<p>
 								<a href="/properties/{{$property->id}}" class="btn btn-primary" role="button">More Info</a>
-								{{-- <a href="#" class="btn btn-default" role="button">Button</a> --}}
 							</p>
 						</div>
 					</div>
