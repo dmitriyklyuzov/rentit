@@ -1,10 +1,3 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 require('./scripts');
@@ -17,8 +10,23 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+let axios = require('axios');
+
+Vue.component('sidebar', require('./components/dashboard/Sidebar.vue'));
+Vue.component('userinfo', require('./components/dashboard/UserInfo.vue'));
+Vue.component('properties', require('./components/dashboard/Properties.vue'));
+
+// Passport Components
+Vue.component('passport-clients', require('./components/passport/Clients.vue'));
+Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
+Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+
+// Custom Passport Components
+Vue.component('passport-login-form', require('./components/passport/PassportLoginForm.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+    	currentView: 'profile'
+    }
 });
