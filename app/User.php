@@ -2,12 +2,19 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    public function property(){
+    // protected $fillable =  array('name', 'description', 'cover_image');
+    
+    public function photos(){
+        return $this->hasMany('App\Photo');
+    }
+
+    public function properties(){
         return $this->hasMany('App\Property');
     }
 
@@ -18,7 +25,7 @@ class User extends Authenticatable
         // return "+".$this->phone;
     }
 
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
