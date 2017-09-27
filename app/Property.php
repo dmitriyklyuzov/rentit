@@ -17,15 +17,17 @@ class Property extends Model
     }
 
     public function getFullAddress(){
-        $address = $this->street . ", " . $this->apartment . ", " . $this->city . ", " . $this->state . ", " . $this->zip;
+        if($this->apartment == '' || is_null($this->apartment) || empty($this->apartment)){
+            $apartment = '';
+        }
+        else $apartment = $this->apartment . ", ";
+
+        $address = $this->street . ", " . $apartment .  $this->city . ", " . $this->state . ", " . $this->zip;
         return $address;
     }
 
     public function getGoogleMapsAddress(){
-    	// 1405 71st St, Brooklyn, 11228
-    	$address = $this->street . ", " . $this->city . ", " . $this->state . ", " . $this->zip;
-        // return "1405%2071st%20St,%20Brooklyn,%20NY,%2011228";
-    	return str_replace(" ", "%20", $address);
-    	// 1405%2071st%20St,%20Brooklyn,%20NY,%2011228
+        return str_replace(" ", "%20", $this->getFullAddress());
+        // 1405%2071st%20St,%20Brooklyn,%20NY,%2011228
     }
 }

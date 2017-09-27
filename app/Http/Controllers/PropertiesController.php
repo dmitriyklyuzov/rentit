@@ -7,6 +7,11 @@ use App\Property;
 
 class PropertiesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['show', 'index']]);
+    }
+
     public function index()
     {
         $properties = Property::orderBy('created_at', 'desc')->get();
@@ -20,10 +25,18 @@ class PropertiesController extends Controller
 
     public function store(Request $request)
     {
-        // // Validate input
-        // $this->validate($request, [
-        //     'title'=>'required'
-        // ]);
+        // Validate input
+        $this->validate($request, [
+            'title' => 'required',
+            'bedrooms' => 'required',
+            'bathrooms' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required'
+        ]);
 
         // Create property
         $property = new Property();
@@ -42,8 +55,11 @@ class PropertiesController extends Controller
         $property->user_id = auth()->user()->id;
 
         $property->type = 'Residential';
-        // $property->rented = '0000-00-00 00:00:00';
         $property->cover_image = 'NULL';
+        
+        if($property->apartment == '' || is_null($property->apartment) || empty($property->apartment)){
+            $property->apartment = '';
+        }
 
         $property->save();
 
@@ -66,10 +82,17 @@ class PropertiesController extends Controller
 
     public function update(Request $request, $id)
     {
-        // // Validate input
-        // $this->validate($request, [
-        //     'title'=>'required'
-        // ]);
+        $this->validate($request, [
+            'title' => 'required',
+            'bedrooms' => 'required',
+            'bathrooms' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required'
+        ]);
 
         // Lookup property
         $property = Property::findOrFail($id);
