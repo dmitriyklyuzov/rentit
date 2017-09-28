@@ -80,6 +80,13 @@ class PropertiesController extends Controller
         return view('properties.edit')->with(['property' => $property]);
     }
 
+    public function editPhotos($id)
+    {
+        $property = Property::findOrFail($id);
+        return 'Edit photos view';
+        return view('properties.edit')->with(['property' => $property]);
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
