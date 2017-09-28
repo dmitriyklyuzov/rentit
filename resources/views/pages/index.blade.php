@@ -5,10 +5,25 @@
 @endsection
 
 @section('content')
+
+	<style>
+		.indexTitle{
+			min-height: 2.2em;
+		}
+	</style>
 	<h1 class="text-center">Welcome</h1>
 	
 	@if(count($properties)>0)
 		<h3>Recently Listed Properties</h3>
+		{{-- <p class="text-danger">
+			<b>
+				<span class="visible-xs">XS (EXTRA SMALL)</span>
+				<span class="visible-sm">SM (SMALL)</span>
+				<span class="visible-md">MD (MEDIUM)</span>
+				<span class="visible-lg">LG (LARGE)</span>
+			</b>
+		</p> --}}
+		
 		<br>
 		<div class="row">
 			{{-- Display properties if they exist --}}
@@ -22,7 +37,7 @@
 									alt="{{$property->title}}">
 						</a>
 						<div class="caption">
-							<h3>{{$property->title}}</h3>
+							<h3 class="indexTitle">{{$property->title}}</h3>
 							<p><strong>${{$property->price}}</strong></p>
 
 							{{-- Make thumbnails same height --}}
