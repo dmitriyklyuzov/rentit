@@ -17,10 +17,6 @@
                       <input type="hidden" name="_method" value="DELETE">
                       <input type="submit" value="Delete" class="btn btn-danger">
                   </form>
-                  {{-- {!! Form::open(['action' => ['PropertiesController@destroy', $property->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
-				    	{{ Form::hidden('_method', 'DELETE') }}
-				    	{{ Form::bootSubmit('Delete', ['class' => 'btn btn-danger'])}}
-					{!! Form::close() !!} --}}
                 </div>
             </div>
         @endif
