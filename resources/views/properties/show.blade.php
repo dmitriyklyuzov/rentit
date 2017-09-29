@@ -28,10 +28,11 @@
 	<div class="col-md-8 col-sm-7">
 		
 		{{-- Property image --}}
-		<img
+		{{-- <img
 			class="img-responsive"
 			src="http://cdn.homedsgn.com/wp-content/uploads/2015/02/Capitol-Hill-Loft-03.jpg"
-			alt="{{$property->title}}">
+			alt="{{$property->title}}"> --}}
+		@include('parts.propertyImagesCarousel')
 
 		{{-- Google Maps Embed --}}
 		<div class="embed-responsive embed-responsive-4by3">
