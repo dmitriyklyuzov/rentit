@@ -3,35 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Photo;
 
 class PhotosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function create($property_id){
+        return view('photos.create')->with('property_id', $property_id);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -56,45 +36,27 @@ class PhotosController extends Controller
 
         // Upload photo
         $photo = new Photo;
-        $photo->property_id = $request->input('album_id');
+        $photo->property_id = $request->input('property_id');
         $photo->title = $request->input('title');
         $photo->description = $request->input('description');
         $photo->size = $request->file('photo')->getClientSize();
         $photo->photo = $filenameToStore;
         $photo->save();
 
-        return redirect('/albums/'.$request->input('album_id'))->with('success', 'Photo Uploaded');
+        return redirect('/properties/'.$request->input('property_id'))->with('success', 'Photo Uploaded');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $photo = Photo::find($id);
+        return view('photos.show')->with('photo', $photo);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -108,6 +70,11 @@ class PhotosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photo::find($id);
+
+        if(Storage::delete('public/photos/'.$photo->property_id.'/'.$photo->photo)){
+            $photo->delete();
+            return redirect('/')->with('success', 'Photo Deleted');
+        }
     }
 }
