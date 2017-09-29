@@ -16,10 +16,8 @@ Auth::routes();
 
 Route::get('/', 'PropertiesController@index');
 
-//Edit photos route - handled by the 'edit photos' function of the properties controller 
-Route::get('/properties/{id}/editphotos', 'PropertiesController@editPhotos');
-
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
 Route::resource('properties', 'PropertiesController');
 
+Route::resource('photos', 'PhotosController');
