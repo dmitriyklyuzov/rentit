@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Property;
+// use App\Photo;
 
 class PropertiesController extends Controller
 {
@@ -77,13 +78,6 @@ class PropertiesController extends Controller
     public function edit($id)
     {
         $property = Property::findOrFail($id);
-        return view('properties.edit')->with(['property' => $property]);
-    }
-
-    public function editPhotos($id)
-    {
-        $property = Property::findOrFail($id);
-        return 'Edit photos view';
         return view('properties.edit')->with(['property' => $property]);
     }
 
