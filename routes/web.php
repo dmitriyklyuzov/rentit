@@ -20,4 +20,6 @@ Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
 Route::resource('properties', 'PropertiesController');
 
-Route::resource('photos', 'PhotosController');
+// Route::resource('photos', 'PhotosController');
+Route::get('/photos/create/{id}', 'PhotosController@create');
+Route::get('/photos/{id}/delete', 'PhotosController@destroy');
