@@ -18,8 +18,7 @@ class AddMainColumnsToPhotosTable extends Migration
             $table->string('photo')->after('property_id');
             $table->string('title')->after('photo');
             $table->string('size')->after('title');
-            $table->boolean('is_main')->after('size');
-            $table->string('description')->after('is_main');
+            $table->string('description')->after('size');
         });
         
     }
@@ -36,7 +35,6 @@ class AddMainColumnsToPhotosTable extends Migration
             $table->dropcolumn('photo');
             $table->dropcolumn('title');
             $table->dropcolumn('size');
-            $table->dropcolumn('is_main');
             $table->dropcolumn('description');
         });
     }
