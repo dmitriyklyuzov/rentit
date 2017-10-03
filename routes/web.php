@@ -11,15 +11,28 @@
 |
 */
 
-
+// Auth Routes
 Auth::routes();
 
-Route::get('/', 'PropertiesController@index');
-
+// Dashboard Routes
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
+// Property Routes
+Route::get('/', 'PropertiesController@index');
 Route::resource('properties', 'PropertiesController');
 
-// Route::resource('photos', 'PhotosController');
-Route::get('/photos/create/{id}', 'PhotosController@create');
-Route::get('/photos/{id}/delete', 'PhotosController@destroy');
+// Photo Routes
+// Manage
+Route::get('/properties/{id}/managephotos', 'PhotosController@index')->name('photos.manage');
+// Create
+Route::get('/photos/{id}/create', 'PhotosController@create')->name('photos.create');
+// Store
+Route::post('photos', 'PhotosController@store')->name('photos.store');
+// Show
+Route::get('/photos/{id}', 'PhotosController@show')->name('photos.show');
+// Edit
+Route::get('/photos/{id}/edit', 'PhotosController@edit')->name('photos.edit');
+// Update
+Route::put('/photos/{id}', 'PhotosController@update')->name('photos.update');
+// Destroy
+Route::delete('/photos/{id}', 'PhotosController@destroy')->name('photos.destroy');
