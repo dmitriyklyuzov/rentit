@@ -8,6 +8,11 @@ use App\Photo;
 
 class PhotosController extends Controller
 {
+    public function index($property_id){
+        $photos = Photo::where('property_id', $property_id)->get();
+        return view('photos.index')->with('photos', $photos);
+    }
+
     public function create($property_id){
         return view('photos.create')->with('property_id', $property_id);
     }
@@ -18,6 +23,12 @@ class PhotosController extends Controller
             'title'=>'required',
             'photo'=>'image|max:1999'
         ]);
+
+        if($request->input('description')=='' || empty($request->input('description')) || is_null($request->input('description')) ){
+            $photo->description = "";
+        }
+        else
+            $photo->description = $request->input('description');
 
         // Get filename with extension
         $filenameWithExt = $request->file('photo')->getClientOriginalName();
@@ -38,9 +49,16 @@ class PhotosController extends Controller
         $photo = new Photo;
         $photo->property_id = $request->input('property_id');
         $photo->title = $request->input('title');
-        $photo->description = $request->input('description');
+        // $photo->description = $request->input('description');
         $photo->size = $request->file('photo')->getClientSize();
         $photo->photo = $filenameToStore;
+        if($request->input('description')=='' || empty($request->input('description')) || is_null($request->input('description')) ){
+            $photo->description = "";
+        }
+        else{
+            $photo->description = $request->input('description');
+        }
+
         $photo->save();
 
         return redirect('/properties/'.$request->input('property_id'))->with('success', 'Photo Uploaded');
@@ -54,12 +72,25 @@ class PhotosController extends Controller
 
     public function edit($id)
     {
-        //
+        $photo = Photo::find($id);
+        return view('photos.edit')->with('photo', $photo);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        // Upload photo
+        $photo = Photo::findOrFail($id);
+        $photo->title = $request->input('title');
+        if($request->input('description')=='' || empty($request->input('description')) || is_null($request->input('description')) ){
+            $photo->description = "";
+        }
+        else{
+            $photo->description = $request->input('description');
+        }
+
+        $photo->save();
+        return view('photos.show')->with('photo', $photo);
+
     }
 
     /**
