@@ -1,29 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Auth Routes
+// *** Auth Routes ***
 Auth::routes();
 
-// Dashboard Routes
+// *** Dashboard Routes ***
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
-// Property Routes
+// *** Property Routes ***
 Route::get('/', 'PropertiesController@index');
 Route::resource('properties', 'PropertiesController');
 
-// Photo Routes
+// CONFLICTING ROUTE!!!!
+// Route::put('properties/{id}', 'PropertiesController@updateCoverPhoto')->name('properties.updateCoverPhoto');
+// CONFLICTING ROUTE!!!!
+
+// *** Photo Routes ***
+
 // Manage
 Route::get('/properties/{id}/managephotos', 'PhotosController@index')->name('photos.manage');
+// Update Cover Photo
+Route::put('properties/{id}/updatecoverphoto', 'PropertiesController@updateCoverPhoto')->name('properties.updateCoverPhoto');
 // Create
 Route::get('/photos/{id}/create', 'PhotosController@create')->name('photos.create');
 // Store
