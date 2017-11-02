@@ -7,16 +7,16 @@
   @endforeach
 @endif
 
-@if(session('success'))
+@if(isset($success))
 	<div class="alert alert-success alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		{{session('success')}}
+		{{$success}}
 	</div>
 @endif
 
-@if(session('error'))
+@if(isset($error))
  	<div class="alert alert-danger alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    	{{session('error')}}
+    	{{$error}}
 	</div>
 @endif
