@@ -8,11 +8,21 @@
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Bootswatch variables
+// @import "~bootstrap-sass/assets/stylesheets/variables";
+
+// Bootswatch Theme Local
+// @import "~bootstrap-sass/assets/stylesheets/bootswatch";
+
 // Bootswatch Theme
-@import url("https://bootswatch.com/flatly/bootstrap.min.css");
+// @import "bootstrap.min";
+
+// Bootswatch Theme Url
+// @import url("https://bootswatch.com/3/flatly/bootstrap.min.css");
 
 // FontAwesome
-@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+// @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "vendor/components/font-awesome/scss/font-awesome.scss";
 
 // Bootstrap-Select
 // @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css");
