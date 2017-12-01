@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Property;
 use App\Photo;
 
 class PhotosController extends Controller
 {
     public function index($property_id){
         $photos = Photo::where('property_id', $property_id)->get();
-        return view('photos.index')->with('photos', $photos);
+        $property = Property::find($property_id);
+        return view('photos.index')->with(['photos' => $photos, 'property_id' => $property_id, 'property' => $property]);
     }
 
     public function create($property_id){
@@ -23,12 +25,6 @@ class PhotosController extends Controller
             'title'=>'required',
             'photo'=>'image|max:1999'
         ]);
-
-        if($request->input('description')=='' || empty($request->input('description')) || is_null($request->input('description')) ){
-            $photo->description = "";
-        }
-        else
-            $photo->description = $request->input('description');
 
         // Get filename with extension
         $filenameWithExt = $request->file('photo')->getClientOriginalName();
@@ -61,7 +57,15 @@ class PhotosController extends Controller
 
         $photo->save();
 
-        return redirect('/properties/'.$request->input('property_id'))->with('success', 'Photo Uploaded');
+        $property = Property::findOrFail($photo->property_id);
+
+        // check if cover photo exists already - if not, set this image to cover
+        if($property->cover_image=='NULL' || is_null($property->cover_image)){
+            $property->cover_image=$photo->photo;
+            $property->save();
+        }
+
+        return redirect("/properties/".$photo->property_id."/managephotos")->with('success', 'Photo Uploaded');
     }
 
     public function show($id)
@@ -81,31 +85,36 @@ class PhotosController extends Controller
         // Upload photo
         $photo = Photo::findOrFail($id);
         $photo->title = $request->input('title');
+        // If no description provided, use ""
         if($request->input('description')=='' || empty($request->input('description')) || is_null($request->input('description')) ){
             $photo->description = "";
         }
+        // Else save get photo description
         else{
             $photo->description = $request->input('description');
         }
 
+        // Save photo
         $photo->save();
-        return view('photos.show')->with('photo', $photo);
 
+        // Redirect to photo dashboard
+        return redirect("/properties/$id/managephotos")->with('success', 'Photo Updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $photo = Photo::find($id);
+        $photo = Photo::findOrFail($id);
+
+        $property = Property::findOrFail($photo->property_id);
+
+        if($property->cover_image == $photo->photo){
+            $property->cover_image = NULL;
+            $property->save();
+        }
 
         if(Storage::delete('public/photos/'.$photo->property_id.'/'.$photo->photo)){
             $photo->delete();
-            return redirect('/')->with('success', 'Photo Deleted');
+            return redirect('/properties/'.$photo->property_id.'/managephotos')->with('success', 'Photo Deleted');
         }
     }
 }
