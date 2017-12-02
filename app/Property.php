@@ -30,4 +30,8 @@ class Property extends Model
         return str_replace(" ", "%20", $this->getFullAddress());
         // 1405%2071st%20St,%20Brooklyn,%20NY,%2011228
     }
+
+    public function getCoverImage(){
+        return $this->cover_image;
+    }
 }
