@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 // *** Auth Routes ***
 Auth::routes();
 
@@ -7,8 +9,9 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('Dashboard');
 
 // *** Property Routes ***
-Route::get('/', 'PropertiesController@index');
+Route::get('/', 'PropertiesController@index')->name('index');
 Route::resource('properties', 'PropertiesController');
+Route::get('/search', 'PropertiesController@search');
 
 // CONFLICTING ROUTE!!!!
 // Route::put('properties/{id}', 'PropertiesController@updateCoverPhoto')->name('properties.updateCoverPhoto');
@@ -19,7 +22,8 @@ Route::resource('properties', 'PropertiesController');
 // Manage
 Route::get('/properties/{id}/managephotos', 'PhotosController@index')->name('photos.manage');
 // Update Cover Photo
-Route::put('properties/{id}/updatecoverphoto', 'PropertiesController@updateCoverPhoto')->name('properties.updateCoverPhoto');
+Route::put('properties/{id}/updatecoverphoto',
+	'PropertiesController@updateCoverPhoto')->name('properties.updateCoverPhoto');
 // Create
 Route::get('/photos/{id}/create', 'PhotosController@create')->name('photos.create');
 // Store
@@ -32,3 +36,6 @@ Route::get('/photos/{id}/edit', 'PhotosController@edit')->name('photos.edit');
 Route::put('/photos/{id}', 'PhotosController@update')->name('photos.update');
 // Destroy
 Route::delete('/photos/{id}', 'PhotosController@destroy')->name('photos.destroy');
+
+// *** Test Routes ***
+Route::get('/test', 'TestController@index');
