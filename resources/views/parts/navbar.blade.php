@@ -10,11 +10,22 @@
 			<a class="navbar-brand" href="/">{{env('APP_NAME')}}</a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
+			
 			<ul class="nav navbar-nav">
 				{{-- <li><a href="#">Home</a></li> --}}
 				{{-- <li><a href="#about">About</a></li> --}}
 				{{-- <li><a href="#contact">Contact</a></li> --}}
 			</ul>
+
+			@if(Route::current()->getName()!='index')
+				{{-- Navbar search --}}
+				<form class="navbar-form navbar-left" method="GET" action="/">
+					<div class="form-group">
+						<input type="search" class="form-control input-md" placeholder="Search" name="q">
+					</div>
+					{{-- <button type="submit" class="btn btn-default btn-sm">Submit</button> --}}
+				</form>
+			@endif
 
 	        <!-- Right Side Of Navbar -->
 	        <ul class="nav navbar-nav navbar-right">
